@@ -1,4 +1,4 @@
-package sample;
+package AthleticsApp;
 
 public class Controller {
 }

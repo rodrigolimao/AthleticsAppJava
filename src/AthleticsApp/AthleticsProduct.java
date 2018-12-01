@@ -1,4 +1,4 @@
-package sample;
+package AthleticsApp;
 
 import javafx.scene.image.Image;
 

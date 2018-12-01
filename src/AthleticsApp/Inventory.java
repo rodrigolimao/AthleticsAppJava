@@ -1,20 +1,13 @@
-package sample;
+package AthleticsApp;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Inventory2 {
+public class Inventory {
 
     public static TreeMap<String, LinkedList<AthleticsProduct>> athleticsTreeMap = new TreeMap<>();
-
-    public static void main(String[] args) {
-        loadProducts();
-       System.out.println(getAllCategory());
-        System.out.println(allProductsArrayList());
-        System.out.println(productsByCategory("Soccer"));
-    }
 
     /*
     Method to addProduct in the TreeMap created

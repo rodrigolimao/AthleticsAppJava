@@ -1,4 +1,4 @@
-package sample;
+package AthleticsApp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static sample.Inventory2.loadProducts;
+import static AthleticsApp.Inventory.loadProducts;
 
 public class Main extends Application {
 
@@ -17,9 +17,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
-
-
-
 
     public static void main(String[] args) {
         loadProducts();
