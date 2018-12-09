@@ -2,6 +2,9 @@ package AthleticsApp;
 
 import javafx.scene.image.Image;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AthleticsProduct {
     private String productName, colour, sport;
     private int units;
@@ -9,15 +12,6 @@ public class AthleticsProduct {
     private Image imageFile;
 
     public AthleticsProduct(String productName, String colour, String sport, double price, int units, Image imageFile) {
-        setProductName(productName);
-        setColour(colour);
-        setColour(sport);
-        setPrice(price);
-        setUnits(units);
-        setImageFile(imageFile);
-    }
-
-    public AthleticsProduct(String productName, String colour, String sport, double price, int units) {
         setProductName(productName);
         setColour(colour);
         setColour(sport);
@@ -55,11 +49,14 @@ public class AthleticsProduct {
     }
 
     public void setSport(String sport) {
-        if (!sport.isEmpty()) {
-            this.sport = sport;
-        } else {
-            throw new IllegalArgumentException("Sport cannot be empty");
+        String[] validSports = {"Basketball", "Volleyball", "Soccer", "Table Tennis", "Cheerleader", "Handball"};
+        for (String validSport : validSports) {
+            if (validSport.equalsIgnoreCase(sport)) {
+                this.sport = validSport;
+                return;
+            }
         }
+        throw new IllegalArgumentException("Valid sports are: Baskteball, Soccer, Volleyball");
     }
 
     public double getPrice() {
@@ -72,7 +69,6 @@ public class AthleticsProduct {
         } else {
             throw new IllegalArgumentException("Price shoud be between 0.1 and 10000");
         }
-
     }
 
     public int getUnits() {
@@ -80,10 +76,10 @@ public class AthleticsProduct {
     }
 
     public void setUnits(int units) {
-        if (units >= 0.1 && units <= 10000) {
+        if (units >= 1 && units <= 10000) {
             this.units = units;
         } else {
-            throw new IllegalArgumentException("Units shoud be between 0.1 and 10000");
+            throw new IllegalArgumentException("Units shoud be between 1 and 10000");
         }
     }
 
@@ -100,12 +96,15 @@ public class AthleticsProduct {
     }
 
     public void setImageFile(Image imageFile) {
+
         this.imageFile = imageFile;
     }
 
     public String toString() {
-        return String.format("Product Name= %s, Price= %s, Units=%s", productName, price, units);
+        return String.format("%s      %s$,   %s units", productName, price, units);
     }
+
+
 
 }
 
