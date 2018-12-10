@@ -43,10 +43,13 @@ public class AthleticsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //Setting prompt text of ComboBox
-        sportComboBox.setPromptText("Select just one sport...");
+        sportComboBox.setPromptText("Select just one sport");
 
         //Method to choose the appropriate list of each category in the ComboBox
         comboBoxUpdated();
+
+        //Radio button updated if the comboBox is not selected
+        radioButtonsUpdatedGeneral();
 
         //Populating the ComboBox with Category names
         sportComboBox.getItems().addAll(inventory.getAllCategories());
@@ -57,9 +60,7 @@ public class AthleticsController implements Initializable {
         //Setting opening image
         imageView.setImage(new Image("AthleticsApp/images/atletica.png"));
 
-        //Radio button updated if the comboBox is not selected
-        radioButtonsUpdatedGeneral();
-
+        
         //Populating the List View
         listView.getItems().addAll(inventory.allProductsList());
         listView.getSelectionModel().select(0);
