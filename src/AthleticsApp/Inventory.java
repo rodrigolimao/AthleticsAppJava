@@ -121,6 +121,29 @@ public class Inventory {
                 .collect(Collectors.toList());
     }
 
+    public List<AthleticsProduct> lowPriceSort(List<AthleticsProduct> products)
+    {
+        Collections.sort(products, (a,b)-> {
+            if (a.getPrice()>b.getPrice())
+                return 1;
+            else
+                return -1;
+        });
+        return products;
+    }
+
+    public List<AthleticsProduct> highPriceSort(List<AthleticsProduct> products)
+    {
+        Collections.sort(products, (a,b)-> {
+            if (a.getPrice()>b.getPrice())
+                return -1;
+            else
+                return 1;
+        });
+        return products;
+    }
+
+
 }
 
 

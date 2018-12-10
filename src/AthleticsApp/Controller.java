@@ -22,8 +22,6 @@ public class Controller implements Initializable {
     @FXML
     private ListView listView;
     @FXML
-    private ToggleGroup group;
-    @FXML
     private RadioButton radioButtonPriceHigh;
     @FXML
     private RadioButton radioButtonPriceLow;
@@ -62,7 +60,9 @@ public class Controller implements Initializable {
         listView.getItems().addAll(inventory.allProductsList());
         listView.getSelectionModel().select(0);
 
-        radioButtonsUpdated();
+        //Radio button updated if the comboBox is not selected
+        radioButtonsUpdatedGeneral();
+
         //Setting the total Inventory Label to the calculation formula created below
         totalInventoryLabel.setText(Double.toString(totalInventoryCalculation()));
 
@@ -84,6 +84,7 @@ public class Controller implements Initializable {
             totalCategoryLabel.setText(Double.toString(categoryCalculation()));
         });
     }
+
     /**
      * Method to calculate the total Inventory using streams
      *
@@ -99,6 +100,7 @@ public class Controller implements Initializable {
 
     /**
      * Method to calculate the total for each category
+     *
      * @return
      */
     public double categoryCalculation() {
@@ -117,30 +119,30 @@ public class Controller implements Initializable {
         } else if (sportComboBox.getSelectionModel().getSelectedItem().equals("Cheerleader")) {
             double cheerleaderTotal = inventory.productsByCategory("Cheerleader")
                     .stream()
-                    .mapToDouble(p->p.getPrice()*p.getUnits())
+                    .mapToDouble(p -> p.getPrice() * p.getUnits())
                     .sum();
             return cheerleaderTotal;
         } else if (sportComboBox.getSelectionModel().getSelectedItem().equals("Table Tennis")) {
             double tennisTotal = inventory.productsByCategory("Table Tennis")
                     .stream()
-                    .mapToDouble(p->p.getPrice()*p.getUnits())
+                    .mapToDouble(p -> p.getPrice() * p.getUnits())
                     .sum();
             return tennisTotal;
         } else
             return 0;
-        }
+    }
 
-        /**
-         * Method to update the ListView and the Total Category Label
-         */
-        public void comboBoxUpdated() {
-            sportComboBox.setOnAction((event) -> {
-                sportComboBox.getSelectionModel().getSelectedItem();
-                listView.getItems().clear();
-                listView.getItems().addAll(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString()));
-                listView.getSelectionModel().select(1);
-                totalCategoryLabel.setText(Double.toString(categoryCalculation()));
-                radioButtonsUpdated();
+    /**
+     * Method to update the ListView and the Total Category Label
+     */
+    public void comboBoxUpdated() {
+        sportComboBox.setOnAction((event) -> {
+            sportComboBox.getSelectionModel().getSelectedItem();
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            listView.getSelectionModel().select(1);
+            totalCategoryLabel.setText(Double.toString(categoryCalculation()));
+            radioButtonsUpdated();
 
 //                if (sportComboBox.getSelectionModel().getSelectedItem().equals("Soccer")) {
 //                listView.getItems().clear();
@@ -172,32 +174,62 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Method to update the radioButton once selected
+     * Method to update the radioButton once the comboBox has been selected
      */
     public void radioButtonsUpdated() {
 
-        if(radioButtonProdAsc.isPressed()){
-            List ascList = listView.getItems();
-            ascList = inventory.ascedingSort(ascList);
-            listView.getItems().addAll(inventory.ascedingSort(ascList));
+        radioButtonProductDesc.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
 
-        } else if(radioButtonProductDesc.isPressed()){
+        });
+        radioButtonProdAsc.setOnAction((event) -> {
             listView.getItems().clear();
             listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
-        }
-//            if (this.group.getSelectedToggle().equals(this.radioButtonProdAsc)) {
-//                List ascList = listView.getItems();
-//                ascList = inventory.ascedingSort(ascList);
-//                listView.getItems().addAll(inventory.ascedingSort(ascList));
-//
-//                if (this.group.getSelectedToggle().equals(this.radioButtonProductDesc)){
-//                    List descList = listView.getItems();
-//                    descList = inventory.ascedingSort(descList);
-//                    listView.getItems().addAll(inventory.ascedingSort(descList));
-//                }
-//            }
-        }
+
+        });
+        radioButtonPriceLow.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.lowPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+        });
+        radioButtonPriceHigh.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.highPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+        });
+    }
+
+    /**
+     * Method to sort the list if the ComboBox is not selected yet
+     */
+
+    public void radioButtonsUpdatedGeneral() {
+
+        radioButtonProductDesc.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.descendingSort(inventory.allProductsList()));
+
+        });
+
+        radioButtonProdAsc.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.ascedingSort(inventory.allProductsList()));
+        });
+
+        radioButtonPriceLow.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.lowPriceSort(inventory.allProductsList()));
+
+        });
+
+        radioButtonPriceHigh.setOnAction((event) -> {
+            listView.getItems().clear();
+            listView.getItems().addAll(inventory.highPriceSort(inventory.allProductsList()));
+
+        });
+
+    }
 }
+
 
 
 
