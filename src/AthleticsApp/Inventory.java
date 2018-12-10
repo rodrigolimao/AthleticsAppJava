@@ -91,55 +91,54 @@ public class Inventory {
 
     /**
      * Sorting in ascending order using streams
-     * @param products
+     * @param prod
      * @return
      */
 
-    public List<AthleticsProduct> ascendingSort(List<AthleticsProduct> products) {
-        return products.stream()
+    public List<AthleticsProduct> ascendingSort(List<AthleticsProduct> prod) {
+        return prod.stream()
                 .sorted((a, b) -> a.getProductName().compareToIgnoreCase(b.getProductName()))
                 .collect(Collectors.toList());
     }
     /**
      * Sorting in descending order using streams
-     * @param products
+     * @param prod
      * @return
      */
-    public List<AthleticsProduct> descendingSort(List<AthleticsProduct> products) {
-        return products.stream()
+    public List<AthleticsProduct> descendingSort(List<AthleticsProduct> prod) {
+        return prod.stream()
                 .sorted((a, b) -> b.getProductName().compareToIgnoreCase(a.getProductName()))
                 .collect(Collectors.toList());
     }
     /**
      * Sorting the price from low to high using Collections and lambdas
-     * @param products
+     * @param prod
      * @return
      */
 
-    public List<AthleticsProduct> lowPriceSort(List<AthleticsProduct> products) {
-        Collections.sort(products, (a, b) -> {
+    public List<AthleticsProduct> lowPriceSort(List<AthleticsProduct> prod) {
+        Collections.sort(prod, (a, b) -> {
             if (a.getPrice() > b.getPrice())
                 return 1;
             else
                 return -1;
         });
-        return products;
+        return prod;
     }
     /**
      * Sorting the price from high to low using Collections and lambdas
-     * @param products
+     * @param prod
      * @return
      */
-    public List<AthleticsProduct> highPriceSort(List<AthleticsProduct> products) {
-        Collections.sort(products, (a, b) -> {
+    public List<AthleticsProduct> highPriceSort(List<AthleticsProduct> prod) {
+        Collections.sort(prod, (a, b) -> {
             if (a.getPrice() > b.getPrice())
                 return -1;
             else
                 return 1;
         });
-        return products;
+        return prod;
     }
-
 }
 
 
