@@ -101,7 +101,7 @@ public class AthleticsProduct {
     }
 
     public String toString() {
-        return String.format("%s      %s$,   %s units", productName, price, units);
+        return String.format("%s      $%s   %s units", productName, price, units);
     }
 
 

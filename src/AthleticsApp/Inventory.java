@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Inventory {
 
-    public TreeMap<String, LinkedList<AthleticsProduct>> athleticsTreeMap;
+    private TreeMap<String, LinkedList<AthleticsProduct>> athleticsTreeMap;
 
     public Inventory() {
         athleticsTreeMap = new TreeMap<>();
@@ -53,7 +53,7 @@ public class Inventory {
     }
 
     /**
-    Return a List with all products for a specific category
+     Return a List with all products for a specific category
      **/
     public LinkedList<AthleticsProduct> productsByCategory(String category) {
         return athleticsTreeMap.get(category);
@@ -61,10 +61,10 @@ public class Inventory {
     }
 
     /**
-    Return a List with ALL products in an ArrayList
+    Return a List with ALL products in Linkedlist
      **/
-    public ArrayList<AthleticsProduct> allProductsList() {
-        ArrayList<AthleticsProduct> arrayList = new ArrayList<>();
+    public LinkedList<AthleticsProduct> allProductsList() {
+        LinkedList<AthleticsProduct> arrayList = new LinkedList<>();
         for (String chave : athleticsTreeMap.keySet()) {
             arrayList.addAll(athleticsTreeMap.get(chave));
         }
