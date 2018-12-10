@@ -78,6 +78,6 @@
       <ComboBox fx:id="sportComboBox" layoutX="14.0" layoutY="271.0" prefHeight="27.0" prefWidth="189.0" stylesheets="@ecouff.css" />
       <Label fx:id="totalInventoryLabel" layoutX="184.0" layoutY="417.0" prefHeight="17.0" prefWidth="134.0" text="Label" textFill="#ffbe0f" />
       <Label fx:id="totalCategoryLabel" layoutX="184.0" layoutY="462.0" prefHeight="17.0" prefWidth="143.0" text="Label" textFill="#ffbe0f" />
-      <ListView fx:id="listView" layoutX="13.0" layoutY="27.0" prefHeight="200.0" prefWidth="380.0" stylesheets="@ecouff.css" />
+      <ListView fx:id="athleticsListView" layoutX="13.0" layoutY="27.0" prefHeight="200.0" prefWidth="380.0" stylesheets="@ecouff.css" />
    </children>
 </AnchorPane>

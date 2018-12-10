@@ -18,7 +18,7 @@ public class AthleticsController implements Initializable {
     @FXML
     private ImageView imageView;
     @FXML
-    private ListView listView;
+    private ListView athleticsListView;
     @FXML
     private RadioButton radioButtonPriceHigh;
     @FXML
@@ -59,14 +59,14 @@ public class AthleticsController implements Initializable {
 
 
         //Populating the List View
-        listView.getItems().addAll(inventory.allProductsList());
-        listView.getSelectionModel().select(0);
+        athleticsListView.getItems().addAll(inventory.allProductsList());
+        athleticsListView.getSelectionModel().select(0);
 
         //Setting the total Inventory Label to the calculation formula created below
         totalInventoryLabel.setText(Double.toString(totalInventoryCalculation()));
 
-        //Adding the Listener in the listView
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AthleticsProduct>() {
+        //Adding the Listener in the athleticsListView
+        athleticsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AthleticsProduct>() {
             @Override
             public void changed(ObservableValue<? extends AthleticsProduct> observable, AthleticsProduct oldValue, AthleticsProduct newValue) {
                 if (newValue != null)
@@ -77,8 +77,8 @@ public class AthleticsController implements Initializable {
 
         //Selling Button on action to decrease the units and update the category and inventory label
         sellingButton.setOnAction(event -> {
-            inventory.sellingUnits((AthleticsProduct) listView.getSelectionModel().getSelectedItem());
-            listView.refresh();
+            inventory.sellingUnits((AthleticsProduct) athleticsListView.getSelectionModel().getSelectedItem());
+            athleticsListView.refresh();
             totalInventoryLabel.setText(Double.toString(totalInventoryCalculation()));
             totalCategoryLabel.setText(Double.toString(categoryCalculation()));
         });
@@ -131,14 +131,14 @@ public class AthleticsController implements Initializable {
     }
 
     /**
-     * Method to update the ListView and the Total Category Label
+     * Method to update the athleticsListView and the Total Category Label
      */
     public void comboBoxUpdated() {
         sportComboBox.setOnAction((event) -> {
             sportComboBox.getSelectionModel().getSelectedItem();
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
-            listView.getSelectionModel().select(1);
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            athleticsListView.getSelectionModel().select(1);
             totalCategoryLabel.setText(Double.toString(categoryCalculation()));
             radioButtonsUpdated();
         });
@@ -150,22 +150,22 @@ public class AthleticsController implements Initializable {
     public void radioButtonsUpdated() {
 
         radioButtonProductDesc.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.descendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
 
         });
         radioButtonProdAsc.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.ascendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.ascendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
 
         });
         radioButtonPriceLow.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.lowPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.lowPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
         });
         radioButtonPriceHigh.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.highPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.highPriceSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
         });
     }
 
@@ -175,25 +175,25 @@ public class AthleticsController implements Initializable {
     public void radioButtonsUpdatedGeneral() {
 
         radioButtonProductDesc.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.descendingSort(inventory.allProductsList()));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.descendingSort(inventory.allProductsList()));
 
         });
 
         radioButtonProdAsc.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.ascendingSort(inventory.allProductsList()));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.ascendingSort(inventory.allProductsList()));
         });
 
         radioButtonPriceLow.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.lowPriceSort(inventory.allProductsList()));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.lowPriceSort(inventory.allProductsList()));
 
         });
 
         radioButtonPriceHigh.setOnAction((event) -> {
-            listView.getItems().clear();
-            listView.getItems().addAll(inventory.highPriceSort(inventory.allProductsList()));
+            athleticsListView.getItems().clear();
+            athleticsListView.getItems().addAll(inventory.highPriceSort(inventory.allProductsList()));
 
         });
     }
