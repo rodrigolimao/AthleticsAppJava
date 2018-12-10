@@ -7,11 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class AthleticsController implements Initializable {
 
@@ -60,7 +57,7 @@ public class AthleticsController implements Initializable {
         //Setting opening image
         imageView.setImage(new Image("AthleticsApp/images/atletica.png"));
 
-        
+
         //Populating the List View
         listView.getItems().addAll(inventory.allProductsList());
         listView.getSelectionModel().select(0);
