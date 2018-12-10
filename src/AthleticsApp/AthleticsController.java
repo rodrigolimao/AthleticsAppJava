@@ -68,7 +68,7 @@ public class AthleticsController implements Initializable {
         //Adding the Listener in the athleticsListView
         athleticsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AthleticsProduct>() {
             @Override
-            public void changed(ObservableValue<? extends AthleticsProduct> observable, AthleticsProduct oldValue, AthleticsProduct newValue) {
+            public void changed(ObservableValue<? extends AthleticsProduct> obs, AthleticsProduct old, AthleticsProduct newValue) {
                 if (newValue != null)
                     //Changes the picture
                     imageView.setImage(newValue.getImageFile());

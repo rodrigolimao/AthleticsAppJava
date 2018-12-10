@@ -139,6 +139,19 @@ public class Inventory {
         });
         return prod;
     }
-}
+
+//    public List<AthleticsProduct> highPriceSorta(List<AthleticsProduct> prod) {
+//        return prod.stream()
+//                .sorted((a, b) -> b.getPrice()>(a.getPrice()))
+//                .collect(Collectors.toList());
+//
+//
+//
+//    }
+    }
+
+
+
+
 
 
