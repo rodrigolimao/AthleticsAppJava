@@ -2,9 +2,6 @@ package AthleticsApp;
 
 import javafx.scene.image.Image;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class AthleticsProduct {
     private String productName, colour, sport;
     private int units;
@@ -103,8 +100,6 @@ public class AthleticsProduct {
     public String toString() {
         return String.format("%s      $%s   %s units", productName, price, units);
     }
-
-
 
 }
 

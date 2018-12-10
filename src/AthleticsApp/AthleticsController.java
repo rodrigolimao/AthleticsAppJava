@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Controller implements Initializable {
+public class AthleticsController implements Initializable {
 
+    //Declaring JavaFx variables and Instantiating the inventory
     @FXML
     private ComboBox sportComboBox;
     @FXML
@@ -48,7 +49,7 @@ public class Controller implements Initializable {
         comboBoxUpdated();
 
         //Populating the ComboBox with Category names
-        sportComboBox.getItems().addAll(inventory.getCategoriesNames());
+        sportComboBox.getItems().addAll(inventory.getAllCategories());
 
         //Setting Category Label to Not Applicable, since there was no selection
         totalCategoryLabel.setText("N/A");
@@ -56,12 +57,12 @@ public class Controller implements Initializable {
         //Setting opening image
         imageView.setImage(new Image("AthleticsApp/images/atletica.png"));
 
+        //Radio button updated if the comboBox is not selected
+        radioButtonsUpdatedGeneral();
+
         //Populating the List View
         listView.getItems().addAll(inventory.allProductsList());
         listView.getSelectionModel().select(0);
-
-        //Radio button updated if the comboBox is not selected
-        radioButtonsUpdatedGeneral();
 
         //Setting the total Inventory Label to the calculation formula created below
         totalInventoryLabel.setText(Double.toString(totalInventoryCalculation()));
@@ -87,7 +88,6 @@ public class Controller implements Initializable {
 
     /**
      * Method to calculate the total Inventory using streams
-     *
      * @return
      */
     public double totalInventoryCalculation() {
@@ -99,7 +99,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Method to calculate the total for each category
+     * Method to calculate the total for each category using streams
      *
      * @return
      */
@@ -143,38 +143,11 @@ public class Controller implements Initializable {
             listView.getSelectionModel().select(1);
             totalCategoryLabel.setText(Double.toString(categoryCalculation()));
             radioButtonsUpdated();
-
-//                if (sportComboBox.getSelectionModel().getSelectedItem().equals("Soccer")) {
-//                listView.getItems().clear();
-//                listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory("Soccer")));
-//                listView.getSelectionModel().select(0);
-//                totalCategoryLabel.setText(Double.toString(categoryCalculation()));
-//            } else if (sportComboBox.getSelectionModel().getSelectedItem().equals("Basketball")) {
-//                listView.getItems().clear();
-//                listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory("Basketball")));
-//                listView.getSelectionModel().select(0);
-//                totalCategoryLabel.setText(Double.toString(categoryCalculation()));
-//            } else if (sportComboBox.getSelectionModel().getSelectedItem().equals("Cheerleader")) {
-//                listView.getItems().clear();
-//                listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory("Cheerleader")));
-//                listView.getSelectionModel().select(0);
-//                totalCategoryLabel.setText(Double.toString(categoryCalculation()));
-//            } else if (sportComboBox.getSelectionModel().getSelectedItem().equals("Table Tennis")) {
-//                listView.getItems().clear();
-//                listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory("Table Tennis")));
-//                listView.getSelectionModel().select(0);
-//                totalCategoryLabel.setText(Double.toString(categoryCalculation()));
-//            } else {
-//                listView.getItems().clear();
-//                sportComboBox.setPromptText("Select a Genre");
-//                listView.getItems().addAll(inventory.allProductsList());
-//                totalCategoryLabel.setText("N/A");
-//            }
         });
     }
 
     /**
-     * Method to update the radioButton once the comboBox has been selected
+     * Method to update the radioButton if the comboBox has been selected
      */
     public void radioButtonsUpdated() {
 
@@ -185,7 +158,7 @@ public class Controller implements Initializable {
         });
         radioButtonProdAsc.setOnAction((event) -> {
             listView.getItems().clear();
-            listView.getItems().addAll(inventory.ascedingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
+            listView.getItems().addAll(inventory.ascendingSort(inventory.productsByCategory(sportComboBox.getSelectionModel().getSelectedItem().toString())));
 
         });
         radioButtonPriceLow.setOnAction((event) -> {
@@ -201,7 +174,6 @@ public class Controller implements Initializable {
     /**
      * Method to sort the list if the ComboBox is not selected yet
      */
-
     public void radioButtonsUpdatedGeneral() {
 
         radioButtonProductDesc.setOnAction((event) -> {
@@ -212,7 +184,7 @@ public class Controller implements Initializable {
 
         radioButtonProdAsc.setOnAction((event) -> {
             listView.getItems().clear();
-            listView.getItems().addAll(inventory.ascedingSort(inventory.allProductsList()));
+            listView.getItems().addAll(inventory.ascendingSort(inventory.allProductsList()));
         });
 
         radioButtonPriceLow.setOnAction((event) -> {
@@ -226,7 +198,6 @@ public class Controller implements Initializable {
             listView.getItems().addAll(inventory.highPriceSort(inventory.allProductsList()));
 
         });
-
     }
 }
 

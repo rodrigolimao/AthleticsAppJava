@@ -16,8 +16,9 @@ public class Inventory {
         athleticsTreeMap = new TreeMap<>();
         loadProducts();
     }
+
     /**
-    Method to addProduct in the TreeMap created
+     * Method to addProduct in the TreeMap created
      */
     public void addProduct(String productName, String colour, String sport, double price, int units, Image imageFile) {
         String key = sport;
@@ -32,7 +33,7 @@ public class Inventory {
     }
 
     /**
-    Method to load the Products created in the TreeMap
+     * Method to load the Products created in the TreeMap
      */
     public void loadProducts() {
         addProduct("Neymar Short", "Blue", "Soccer", 20, 20, new Image("AthleticsApp/images/neymar.jpg"));
@@ -44,16 +45,16 @@ public class Inventory {
         addProduct("Kevin Durant Socks", "Yellow", "Basketball", 10, 20, new Image("AthleticsApp/images/durant.jpg"));
         addProduct("Stephen Curry Shoes", "Black", "Basketball", 200, 20, new Image("AthleticsApp/images/curry.jpg"));
         addProduct("Vodka Mug", "Yellow", "Cheerleader", 35, 20, new Image("AthleticsApp/images/Caneca.jpg"));
-        addProduct("Cheer Combo", "Blue", "Cheerleader", 10, 20, new Image("AthleticsApp/images/cheer.jpg") );
+        addProduct("Cheer Combo", "Blue", "Cheerleader", 10, 20, new Image("AthleticsApp/images/cheer.jpg"));
         addProduct("Short Doll", "Yellow", "Cheerleader", 25, 20, new Image("AthleticsApp/images/Short Doll.jpg"));
         addProduct("Sexy Socks", "Blue", "Cheerleader", 10, 20, new Image("AthleticsApp/images/Meia.jpg"));
         addProduct("Calderano Shirt", "Blue", "Table Tennis", 100, 20, new Image("AthleticsApp/images/calderano.jpeg"));
-        addProduct("Timo Boll Bat", "Yellow", "Table Tennis", 250, 20,new Image("AthleticsApp/images/timoBoll.jpg"));
+        addProduct("Timo Boll Bat", "Yellow", "Table Tennis", 250, 20, new Image("AthleticsApp/images/timoBoll.jpg"));
         addProduct("XU Xin Short", "Blue", "Table Tennis", 50, 20, new Image("AthleticsApp/images/xuxin.png"));
     }
 
     /**
-     Return a List with all products for a specific category
+     * Return a List with all products for a specific category
      **/
     public LinkedList<AthleticsProduct> productsByCategory(String category) {
         return athleticsTreeMap.get(category);
@@ -61,7 +62,7 @@ public class Inventory {
     }
 
     /**
-    Return a List with ALL products in Linkedlist
+     * Return a List with ALL products in Linkedlist
      **/
     public LinkedList<AthleticsProduct> allProductsList() {
         LinkedList<AthleticsProduct> arrayList = new LinkedList<>();
@@ -72,77 +73,76 @@ public class Inventory {
     }
 
     /**
-    Return ALL category names
+     * Return ALL category names
      **/
     public Set<String> getAllCategories() {
         for (Map.Entry<String, LinkedList<AthleticsProduct>> entry : athleticsTreeMap.entrySet()) {
             String key = entry.getKey();
-            System.out.println(key);
         }
         return athleticsTreeMap.keySet();
     }
 
-    public ObservableList<String> returnListOfSports(){
-        // Creating the set of the keys which are guitar types
-        Set<String> myKeys = athleticsTreeMap.keySet();
-        // Using stream to make new observable list
-        ObservableList<String> keyList = myKeys.stream().sorted().collect(Collector.of(FXCollections::observableArrayList,
-                ObservableList::add,(a,b) -> {a.addAll(b); return a;}));
-        return keyList;
-    }
-
-    public Set<String> getCategoriesNames() {
-        Set<String> categoryNames =  athleticsTreeMap.keySet();
-        return categoryNames;
-    }
-
-
     /**
      * Sell Unit method
+     *
      * @param product
      */
-    public void sellingUnits(AthleticsProduct product){
+    public void sellingUnits(AthleticsProduct product) {
         int unitsLeft = product.getUnits();
         unitsLeft--;
         product.setUnits(unitsLeft);
     }
 
-    public List<AthleticsProduct> ascedingSort(List<AthleticsProduct> products)
-    {
-        return  products.stream()
-                .sorted ((a,b) -> a.getProductName().compareToIgnoreCase(b.getProductName()))
+    /**
+     * Sorting in ascending order using streams
+     * @param products
+     * @return
+     */
+
+    public List<AthleticsProduct> ascendingSort(List<AthleticsProduct> products) {
+        return products.stream()
+                .sorted((a, b) -> a.getProductName().compareToIgnoreCase(b.getProductName()))
                 .collect(Collectors.toList());
     }
-
-    public List<AthleticsProduct> descendingSort(List<AthleticsProduct> products)
-    {
-        return  products.stream()
-                .sorted ((a,b) -> b.getProductName().compareToIgnoreCase(a.getProductName()))
+    /**
+     * Sorting in descending order using streams
+     * @param products
+     * @return
+     */
+    public List<AthleticsProduct> descendingSort(List<AthleticsProduct> products) {
+        return products.stream()
+                .sorted((a, b) -> b.getProductName().compareToIgnoreCase(a.getProductName()))
                 .collect(Collectors.toList());
     }
+    /**
+     * Sorting the price from low to high using Collections and lambdas
+     * @param products
+     * @return
+     */
 
-    public List<AthleticsProduct> lowPriceSort(List<AthleticsProduct> products)
-    {
-        Collections.sort(products, (a,b)-> {
-            if (a.getPrice()>b.getPrice())
+    public List<AthleticsProduct> lowPriceSort(List<AthleticsProduct> products) {
+        Collections.sort(products, (a, b) -> {
+            if (a.getPrice() > b.getPrice())
                 return 1;
             else
                 return -1;
         });
         return products;
     }
-
-    public List<AthleticsProduct> highPriceSort(List<AthleticsProduct> products)
-    {
-        Collections.sort(products, (a,b)-> {
-            if (a.getPrice()>b.getPrice())
+    /**
+     * Sorting the price from high to low using Collections and lambdas
+     * @param products
+     * @return
+     */
+    public List<AthleticsProduct> highPriceSort(List<AthleticsProduct> products) {
+        Collections.sort(products, (a, b) -> {
+            if (a.getPrice() > b.getPrice())
                 return -1;
             else
                 return 1;
         });
         return products;
     }
-
 
 }
 
